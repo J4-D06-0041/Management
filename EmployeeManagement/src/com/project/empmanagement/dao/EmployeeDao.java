@@ -3,7 +3,6 @@ package com.project.empmanagement.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,8 +82,7 @@ public class EmployeeDao {
 			}
 			
 		} catch (Exception e) {
-			e.printStackTrace();
-			// TODO: handle exception
+			System.out.println(e.getMessage());
 		}
 		return listOfEmployee;
 	}
