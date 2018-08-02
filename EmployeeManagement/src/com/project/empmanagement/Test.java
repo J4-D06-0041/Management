@@ -32,6 +32,7 @@ public class Test{
 		/* register(); */
 		/* menu(); */
 	}
+	
 	public static void action(){
 		String inputUserName;
 		String inputPassword;
@@ -43,6 +44,7 @@ public class Test{
 			inputUserName = cj.nextLine();
 			System.out.println("Enter Password: ");
 			inputPassword = cj.nextLine();
+			
 			RegisterDao.compare(inputUserName, inputPassword);
 		}else if (action == 2){
 			register();

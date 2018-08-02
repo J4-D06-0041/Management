@@ -11,8 +11,9 @@ import com.project.empmanagement.connection.DbConnector;
 import com.project.empmanagement.models.Register;
 
 public class RegisterDao {
+
 	private static String insertUserQuery = "insert into management.users (user_name,password, first_name, last_name) values (?, ?, ?, ?)";
-	private static String compareQuery = "select user_name, password from management.users";
+	private static String compareQuery = "select user_name, password from management.users where user_name = ? or password = ?";
 	private static String selectAllUser = "select * from management.users";
 	private static Connection con = null;
 
@@ -62,31 +63,38 @@ public class RegisterDao {
 	}
 
 	public static void compare(String username, String password) {
-		String userInput;
-		String passwordInput;
 		try {
 			con = DbConnector.getConnection();
 			PreparedStatement ps = con.prepareStatement(compareQuery);
+			ps.setString(1, username);
+			ps.setString(2, password);
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
+
+				String userInput;
+				String passwordInput;
 				userInput = rs.getString("user_name");
 				passwordInput = rs.getString("password");
+				do {
+					if (userInput.equals(username) && passwordInput.equals(password)) {
+						System.out.println("Successfully Logged-In");
+						Test.menu();
+					} else if (userInput.equals(username) && !passwordInput.equals(password)) {
+						System.out.println("Invalid Password");
+						System.out.println("Try Again");
+						Test.action();
 
-				if (userInput.equals(username) && passwordInput.equals(password)) {
-					System.out.println("Successfully Logged-In");
-					Test.menu();
-				} else if (userInput.equals(username) && !passwordInput.equals(password)) {
-					System.out.println("Invalid Password");
-					System.out.println("Try Again");
-					
-				} else if (!userInput.equals(username) && passwordInput.equals(password)) {
-					System.out.println("Invalid Username");
-					System.out.println("Try Again");
-				} else if (!userInput.equals(username) && !passwordInput.equals(password)){
-					System.out.println("Invalid UserName and Password:");
-					System.out.println("Try Again");
-				}
+					} else if (!userInput.equals(username) && passwordInput.equals(password)) {
+						System.out.println("Invalid Username");
+						System.out.println("Try Again");
+						Test.action();
+					} else{
+						System.out.println("Invalid UserName and Password:");
+						System.out.println("Try Again");
+						Test.action();
+					}
+				} while (!userInput.equals(username) || !passwordInput.equals(password));
 
 			}
 		} catch (Exception e) {
