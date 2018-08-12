@@ -3,6 +3,7 @@ package com.project.empmanagement;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+import com.project.empmanagement.connection.DbConnector;
 import com.project.empmanagement.dao.EmployeeDao;
 import com.project.empmanagement.dao.RegisterDao;
 
@@ -45,7 +46,7 @@ public class Test{
 			System.out.println("Enter Password: ");
 			inputPassword = cj.nextLine();
 			
-			RegisterDao.compare(inputUserName, inputPassword);
+//			RegisterDao.compare(inputUserName, inputPassword);
 		}else if (action == 2){
 			register();
 		}

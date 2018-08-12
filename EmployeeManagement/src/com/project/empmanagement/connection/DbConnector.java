@@ -9,7 +9,7 @@ import java.util.Date;
 
 public class DbConnector {
 
-	private static String url = "jdbc:mysql://localhost:3307/management?characterEncoding=utf8&amp";
+	private static String url = "jdbc:mysql://localhost:3306/management?characterEncoding=utf8&amp";
 	private static String user = "root";
 	private static String pass = "root";
 	public DbConnector() {

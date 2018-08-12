@@ -62,7 +62,7 @@ public class RegisterDao {
 
 	}
 
-	public static void compare(String username, String password) {
+	public static String compare(String username, String password) throws Exception {
 		try {
 			con = DbConnector.getConnection();
 			PreparedStatement ps = con.prepareStatement(compareQuery);
@@ -78,21 +78,21 @@ public class RegisterDao {
 				passwordInput = rs.getString("password");
 				do {
 					if (userInput.equals(username) && passwordInput.equals(password)) {
-						System.out.println("Successfully Logged-In");
-						Test.menu();
+						return ("Successfully Logged-In");
+//						Test.menu();
 					} else if (userInput.equals(username) && !passwordInput.equals(password)) {
-						System.out.println("Invalid Password");
-						System.out.println("Try Again");
-						Test.action();
+						return ("Invalid Password");
+//						System.out.println("Try Again");
+//						Test.action();
 
 					} else if (!userInput.equals(username) && passwordInput.equals(password)) {
-						System.out.println("Invalid Username");
-						System.out.println("Try Again");
-						Test.action();
+						return ("Invalid Username");
+//						System.out.println("Try Again");
+//						Test.action();
 					} else{
-						System.out.println("Invalid UserName and Password:");
-						System.out.println("Try Again");
-						Test.action();
+						return ("Invalid UserName and Password:");
+//						System.out.println("Try Again");
+//						Test.action();
 					}
 				} while (!userInput.equals(username) || !passwordInput.equals(password));
 
@@ -100,7 +100,9 @@ public class RegisterDao {
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println(e.getMessage());
+			throw e;
 		}
+		return "";
 
 	}
 

@@ -1,8 +1,10 @@
-function call() {
+function call(user, pass) {
 	console.log('Hello World');
+	var user = document.getElementById("userName").value;
+	var pass = document.getElementById("passWord").value;
 	var request = new XMLHttpRequest();
 
-	request.open('GET', 'http://localhost:8080/EmployeeManagement/login/validate/'+user+'/'+pass', true);
+	request.open('GET', 'http://localhost:8080/EmployeeManagement/login/validate/'+user+'/'+pass, true);
 	request.onload = function () {
 
 	  // Begin accessing JSON data here
@@ -12,7 +14,8 @@ function call() {
 	    console.log(data);
 	    alert(data);
 	  } else {
-	    console.log('error');
+	    console.log(data);
+	    alert(data);
 	  }
 	}
 
