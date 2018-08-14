@@ -18,6 +18,5 @@ function call(user, pass) {
 	    alert(data);
 	  }
 	}
-
 	request.send();
 }
